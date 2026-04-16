@@ -1,0 +1,63 @@
+# ── Python ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+wheels/
+*.manifest
+*.spec
+
+# ── Virtual environments ───────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── uv ─────────────────────────────────────────────────
+# uv.lock is committed; ignore uv caches only
+.uv/
+
+# ── Testing / coverage ─────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# ── Type checkers / linters ────────────────────────────
+.mypy_cache/
+.pyre/
+.ruff_cache/
+.pytype/
+
+# ── IDE / editors ──────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Environment / secrets ──────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── Logs ───────────────────────────────────────────────
+*.log
+logs/
+
+# ── Project-specific ───────────────────────────────────
+# Runtime-generated preset overrides (keep default presets.json tracked)
+# presets.local.json
