@@ -39,8 +39,8 @@ if (-not $RelayPort) { $RelayPort = "502" }
 $ApiPort = Read-Host "API port           [8001]"
 if (-not $ApiPort) { $ApiPort = "8001" }
 
-$ServiceName = Read-Host "Service name       [waveshare-relay]"
-if (-not $ServiceName) { $ServiceName = "waveshare-relay" }
+$ServiceName = Read-Host "Service name       [puck-shooter-controller-api]"
+if (-not $ServiceName) { $ServiceName = "puck-shooter-controller-api" }
 
 # Install uv
 

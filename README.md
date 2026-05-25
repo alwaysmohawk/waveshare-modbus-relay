@@ -89,6 +89,14 @@ All arguments are optional and fall back to defaults:
 `install.ps1` installs the headless server as a Windows service that starts automatically on boot.
 It installs `uv` and NSSM silently if they are not already present.
 
+**Before running the script**, allow PowerShell to execute local scripts (one-time, per machine):
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then clone and install:
+
 ```powershell
 git clone https://github.com/alwaysmohawk/waveshare-modbus-relay.git
 cd waveshare-modbus-relay
