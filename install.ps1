@@ -92,11 +92,15 @@ Write-Ok "NSSM at $NssmPath"
 
 Write-Step "Registering service '$ServiceName'..."
 
+$ErrorActionPreference = "Continue"
 $null = & $NssmPath status $ServiceName 2>$null
-if ($LASTEXITCODE -eq 0) {
+$serviceExists = ($LASTEXITCODE -eq 0)
+$ErrorActionPreference = "Stop"
+
+if ($serviceExists) {
     Write-Warn "Service '$ServiceName' already exists - removing and re-registering"
-    & $NssmPath stop $ServiceName 2>&1 | Out-Null
-    & $NssmPath remove $ServiceName confirm | Out-Null
+    & $NssmPath stop $ServiceName 2>$null | Out-Null
+    & $NssmPath remove $ServiceName confirm 2>$null | Out-Null
 }
 
 $UvArgs = "run waveshare-modbus --headless --relay-host $RelayHost --relay-port $RelayPort --api-port $ApiPort"
