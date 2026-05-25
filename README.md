@@ -108,10 +108,10 @@ The script prompts for the relay device IP, relay port, API port, and service na
 **Managing the service after install:**
 
 ```powershell
-nssm status  waveshare-relay
-nssm restart waveshare-relay
-nssm stop    waveshare-relay
-nssm remove  waveshare-relay confirm   # uninstall
+nssm status  puck-shooter-controller-api
+nssm restart puck-shooter-controller-api
+nssm stop    puck-shooter-controller-api
+nssm remove  puck-shooter-controller-api confirm   # uninstall
 ```
 
 To change config (e.g. after the relay device IP changes), re-run `.\install.ps1` — it removes and re-registers the service cleanly.
