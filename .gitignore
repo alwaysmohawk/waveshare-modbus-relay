@@ -61,3 +61,7 @@ logs/
 # ── Project-specific ───────────────────────────────────
 # Runtime-generated preset overrides (keep default presets.json tracked)
 # presets.local.json
+
+# ── Tooling ─────────────────────────────────────────────
+.claude/
+test-relay.js
