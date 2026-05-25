@@ -92,7 +92,7 @@ Write-Ok "NSSM at $NssmPath"
 
 Write-Step "Registering service '$ServiceName'..."
 
-$existing = & $NssmPath status $ServiceName 2>&1
+$null = & $NssmPath status $ServiceName 2>$null
 if ($LASTEXITCODE -eq 0) {
     Write-Warn "Service '$ServiceName' already exists - removing and re-registering"
     & $NssmPath stop $ServiceName 2>&1 | Out-Null
