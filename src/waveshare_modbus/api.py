@@ -29,9 +29,13 @@ class ConnectRequest(BaseModel):
     unit_id: int = 1
 
 
+PULSE_DURATION_MS = 200
+PULSE_ACTION = "on"
+
+
 class PulseRequest(BaseModel):
-    action: str = Field(description="'on' or 'off'")
-    duration_ms: int = Field(ge=100, description="Duration in milliseconds (min 100)")
+    action: str = Field(default=PULSE_ACTION, description="'on' or 'off'")
+    duration_ms: int = Field(default=PULSE_DURATION_MS, ge=100, description="Duration in milliseconds (min 100)")
 
 
 class BatchRequest(BaseModel):
