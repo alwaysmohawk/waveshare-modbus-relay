@@ -77,7 +77,7 @@ $NssmPath = (Get-Command nssm -ErrorAction SilentlyContinue).Source
 
 if (-not $NssmPath) {
     Write-Host "   Installing NSSM via winget..."
-    winget install NSSM.NSSM --silent --accept-package-agreements --accept-source-agreements
+    winget install NSSM.NSSM --silent --source winget --accept-package-agreements --accept-source-agreements
 
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
     $NssmPath = (Get-Command nssm -ErrorAction SilentlyContinue).Source
