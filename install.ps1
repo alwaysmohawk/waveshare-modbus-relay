@@ -1,6 +1,7 @@
 # Waveshare Modbus Relay - Windows Service Installer
 
 $ErrorActionPreference = "Stop"
+Start-Transcript -Path "$PSScriptRoot\install.log" -Append
 
 # Self-elevate if not running as admin
 
