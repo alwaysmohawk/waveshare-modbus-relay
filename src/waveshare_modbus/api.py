@@ -10,7 +10,7 @@ import time
 from collections.abc import Callable
 from typing import TYPE_CHECKING
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -89,7 +89,12 @@ def create_api(
 
     def _require_connection():
         if not client.connected:
-            raise HTTPException(503, "Not connected to device")
+            try:
+                client.connect()
+                if log_callback:
+                    log_callback(f"Auto-connected to {client.host}:{client.port}")
+            except Exception as e:
+                raise HTTPException(503, f"Could not connect to device at {client.host}:{client.port}: {e}")
 
     # ── Connection ──────────────────────────────────────────────
 
@@ -222,7 +227,7 @@ def create_api(
     # ── Pulse Control ───────────────────────────────────────────
 
     @app.post("/api/relays/{channel}/pulse", tags=["pulse"])
-    def pulse(channel: int, req: PulseRequest):
+    def pulse(channel: int, req: PulseRequest = Body(default_factory=PulseRequest)):
         if not 0 <= channel <= 7:
             raise HTTPException(400, "Channel must be 0-7")
         _require_connection()
