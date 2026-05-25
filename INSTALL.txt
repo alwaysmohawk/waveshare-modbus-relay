@@ -1,0 +1,13 @@
+BEFORE RUNNING install.ps1
+--------------------------
+
+Windows blocks PowerShell scripts by default. Run this once in PowerShell
+to allow local scripts on this machine:
+
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Then run the installer:
+
+    .\install.ps1
+
+For full documentation see README.md or https://github.com/alwaysmohawk/waveshare-modbus-relay
