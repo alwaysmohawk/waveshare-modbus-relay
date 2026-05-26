@@ -99,8 +99,10 @@ $ErrorActionPreference = "Stop"
 
 if ($serviceExists) {
     Write-Warn "Service '$ServiceName' already exists - removing and re-registering"
+    $ErrorActionPreference = "Continue"
     & $NssmPath stop $ServiceName 2>$null | Out-Null
     & $NssmPath remove $ServiceName confirm 2>$null | Out-Null
+    $ErrorActionPreference = "Stop"
 }
 
 $UvArgs = "run waveshare-modbus --headless --relay-host $RelayHost --relay-port $RelayPort --api-port $ApiPort"
