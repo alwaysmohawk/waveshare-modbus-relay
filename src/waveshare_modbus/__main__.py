@@ -43,7 +43,7 @@ def _run_headless(args):
     start_socket_client(args.socketio_url, shooter, log_callback=log)
     print(f"Socket.IO client connecting to {args.socketio_url}")
 
-    app = create_api(client, log_callback=log)
+    app = create_api(client, log_callback=log, shooter=shooter)
     print(f"API server running at http://{args.api_host}:{args.api_port}")
     print(f"Docs at http://localhost:{args.api_port}/docs")
     uvicorn.run(app, host=args.api_host, port=args.api_port)

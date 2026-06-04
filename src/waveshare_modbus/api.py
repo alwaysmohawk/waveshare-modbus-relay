@@ -57,6 +57,7 @@ class PresetCreateRequest(BaseModel):
 def create_api(
     client: ModbusClient,
     log_callback: Callable[[str], None] | None = None,
+    shooter=None,
 ) -> FastAPI:
     """Create a FastAPI application bound to the given ModbusClient."""
 
@@ -358,5 +359,17 @@ def create_api(
             return {"applied": name, "states": states}
         except Exception as e:
             raise HTTPException(500, str(e))
+
+    # ── Puck Shooter ────────────────────────────────────────────
+
+    @app.post("/api/shoot/{n}", tags=["shooter"])
+    def shoot(n: int):
+        if not 1 <= n <= 7:
+            raise HTTPException(400, "Puck shooter n must be 1-7")
+        if shooter is None:
+            raise HTTPException(503, "Shooter not available in this mode")
+        _require_connection()
+        shooter.fire(n)
+        return {"puck_shooter": n, "queued": True}
 
     return app
