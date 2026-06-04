@@ -42,6 +42,9 @@ if (-not $ApiPort) { $ApiPort = "8001" }
 $ServiceName = Read-Host "Service name       [puck-shooter-controller-api]"
 if (-not $ServiceName) { $ServiceName = "puck-shooter-controller-api" }
 
+$SocketIOUrl = Read-Host "Socket.IO server URL [http://10.0.10.14:3000]"
+if (-not $SocketIOUrl) { $SocketIOUrl = "http://10.0.10.14:3000" }
+
 # Install uv
 
 Write-Step "Checking uv..."
@@ -105,7 +108,7 @@ if ($serviceExists) {
     $ErrorActionPreference = "Stop"
 }
 
-$UvArgs = "run waveshare-modbus --headless --relay-host $RelayHost --relay-port $RelayPort --api-port $ApiPort"
+$UvArgs = "run waveshare-modbus --headless --relay-host $RelayHost --relay-port $RelayPort --api-port $ApiPort --socketio-url $SocketIOUrl"
 
 & $NssmPath install     $ServiceName $UvPath $UvArgs
 & $NssmPath set         $ServiceName AppDirectory   $RepoRoot
@@ -136,6 +139,7 @@ Write-Host " Service  : $ServiceName"
 Write-Host " Relay    : $RelayHost`:$RelayPort"
 Write-Host " API      : http://localhost:$ApiPort"
 Write-Host " Docs     : http://localhost:$ApiPort/docs"
+Write-Host " Socket.IO: $SocketIOUrl"
 Write-Host ""
 Write-Host " Useful commands:"
 Write-Host "   nssm status $ServiceName"
