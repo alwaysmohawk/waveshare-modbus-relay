@@ -36,12 +36,12 @@ class PuckShooterQueue:
                 self._queue.task_done()
 
     def _sequence(self, n: int):
-        self._log(f"Firing puck shooter {n}")
-        self._client.relay_on(0)
-        self._client.relay_on(n)
+        self._log(f"Firing puck shooter {n} (relay 1 + relay {n + 1})")
+        self._client.relay_on(1)
+        self._client.relay_on(n + 1)
         time.sleep(RELAY_ON_DURATION)
-        self._client.relay_off(0)
-        self._log(f"Relay 0 off — waiting for puck shooter {n} to complete")
+        self._client.relay_off(1)
+        self._log(f"Relay 1 off — waiting for puck shooter {n} to complete")
         time.sleep(RELAY_N_EXTRA_DURATION)
-        self._client.relay_off(n)
+        self._client.relay_off(n + 1)
         self._log(f"Puck shooter {n} complete")

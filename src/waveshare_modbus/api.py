@@ -364,7 +364,7 @@ def create_api(
 
     @app.post("/api/shoot/{n}", tags=["shooter"])
     def shoot(n: int):
-        if not 1 <= n <= 7:
+        if not 1 <= n <= 6:
             raise HTTPException(400, "Puck shooter n must be 1-7")
         if shooter is None:
             raise HTTPException(503, "Shooter not available in this mode")
