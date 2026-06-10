@@ -36,6 +36,9 @@ class PuckShooterQueue:
                 self._queue.task_done()
 
     def _sequence(self, n: int):
+        if not self._client.connected:
+            self._log(f"Not connected — attempting to connect to {self._client.host}:{self._client.port}")
+            self._client.connect()
         self._log(f"Firing puck shooter {n} (relay 1 + relay {n + 1})")
         self._client.relay_on(0)
         self._client.relay_on(n)
